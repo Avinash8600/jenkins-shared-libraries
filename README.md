@@ -2,7 +2,7 @@
 
 ## Overview
 
-Jenkins Shared Libraries allow you to reuse common pipeline code across multiple Jenkins pipelines. They help in maintaining clean, scalable, and DRY (Don't Repeat Yourself) CI/CD workflows.
+Jenkins Shared Libraries are reusable Groovy-based modules that help standardize and simplify CI/CD pipelines by centralizing common logic across multiple Jenkins pipelines.
 
 ---
 
@@ -19,18 +19,27 @@ Jenkins Shared Libraries allow you to reuse common pipeline code across multiple
 
 ```
 (root)
-├── vars/        # Global pipeline variables (Groovy scripts)
+├── vars/        # Global pipeline steps/functions
 ├── src/         # Reusable classes (Groovy code)
 ├── resources/   # Static files (optional)
 ```
 
 ---
 
+## Key Components
+
+* **vars/** – Contains global functions accessible in pipelines
+* **src/** – Contains custom Groovy classes
+* **resources/** – Stores external files like JSON, YAML, etc.
+
+---
+
 ## Types of Libraries
 
-* **Global Library** – Available to all Jenkins pipelines
+* **Global Trusted Library** – Full access to Jenkins internals (configured in Manage Jenkins)
+* **Global Untrusted Library** – Runs in Groovy sandbox with restricted access
 * **Folder-Level Library** – Available within a specific folder
-* **Local Library** – Defined inside a pipeline
+* **Local Library** – Defined and used within a single pipeline
 
 ---
 
@@ -38,11 +47,11 @@ Jenkins Shared Libraries allow you to reuse common pipeline code across multiple
 
 1. Go to **Manage Jenkins → Configure System**
 2. Scroll to **Global Pipeline Libraries**
-3. Add:
+3. Add the following details:
 
-   * Name: `my-shared-lib`
-   * Source: Git repository
-   * Default branch: `main`
+   * **Name:** `my-shared-lib`
+   * **Source:** Git repository
+   * **Default Branch:** `main`
 
 ---
 
@@ -81,10 +90,20 @@ def call() {
 * Keep functions small and reusable
 * Use meaningful naming conventions
 * Version control your library
-* Add documentation for each reusable function
+* Add proper documentation for each function
+* Use versioning (tags/branches) for stability
+
+---
+
+## Advantages
+
+* Promotes code reusability
+* Simplifies pipeline development
+* Ensures consistency across projects
+* Reduces maintenance effort
 
 ---
 
 ## Conclusion
 
-Jenkins Shared Libraries improve pipeline efficiency, reduce duplication, and enable better CI/CD standardization across teams.
+Jenkins Shared Libraries enhance CI/CD efficiency by reducing duplication, improving maintainability, and enabling standardized pipeline development across teams.
