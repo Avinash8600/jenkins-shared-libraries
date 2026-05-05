@@ -12,7 +12,7 @@ def call()
     test -f style.css
 
     # Check docker image exists
-    docker images | grep cloud-native-todo-app-cicd:latest || exit 1
+    docker images | grep avindock/cloud-native-todo-app-cicd:latest || exit 1
 
     # Remove old container if exists
     docker rm -f test-container || true
